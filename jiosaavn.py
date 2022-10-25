@@ -94,3 +94,23 @@ def get_lyrics(id):
     lyrics_json = requests.get(url).text
     lyrics_text = json.loads(lyrics_json)
     return lyrics_text['lyrics']
+
+def get_featured(type):
+    if 'new-release' in type:
+        url = endpoints.browse_get_new_releases
+        featured_json = requests.get(url).text
+        featured_data = json.loads(featured_json)
+        return featured_data['data']
+    if 'featured-playlists' in type:
+        url = endpoints.browse_get_featured_playlists
+        featured_json = requests.get(url).text
+        featured_data = json.loads(featured_json)
+        return featured_data['data']
+    if 'chart' in type:
+        url = endpoints.browse_get_chart
+        featured_json = requests.get(url).text
+        featured_data = json.loads(featured_json)
+        return featured_data
+    
+    
+    

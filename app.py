@@ -167,6 +167,27 @@ def result():
         return jsonify(error)
     return None
 
+@app.route('/featured/')
+def featured():
+    query = request.args.get('query')
+
+    if query:
+        try:
+            response = jiosaavn.get_featured(query);
+            return jsonify(response)
+        except Exception as e:
+            error = {
+                "status": False,
+                "error": str(e)
+            }
+            return jsonify(error)
+
+    else:
+        error = {
+            "status": False,
+            "error": 'Query containing type of featured!'
+        }
+        return jsonify(error)
 
 if __name__ == '__main__':
     app.debug = True
